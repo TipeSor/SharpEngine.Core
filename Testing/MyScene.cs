@@ -13,11 +13,17 @@ public class MyScene : Scene
     public MyScene()
     {
         var e = new Entity();
-        e.AddComponent(new TransformComponent(Vec2.Zero, Vec2.One));
+        e.AddComponent(new TransformComponent(Vec2.Zero, new Vec2(2)));
         e.AddComponent(new RectComponent(Color.AliceBlue, new Vec2(50)));
         e.AddComponent(new ControlComponent());
         e.AddComponent(new CollisionComponent(new Vec2(50), drawDebug: true));
         AddEntity(e);
+        
+        var en = new Entity();
+        en.AddComponent(new TransformComponent(new Vec2(100, 0), Vec2.One));
+        en.AddComponent(new RectComponent(Color.AliceBlue, new Vec2(50)));
+        en.AddComponent(new CollisionComponent(new Vec2(50), drawDebug: true));
+        AddEntity(en);
 
         var e2 = new Entity();
         e2.AddComponent(new TransformComponent(new Vec2(300), Vec2.One));

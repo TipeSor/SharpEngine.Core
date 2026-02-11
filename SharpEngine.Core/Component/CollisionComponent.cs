@@ -68,10 +68,11 @@ public class CollisionComponent(
     public Rect GetCollisionRect(Vec2? position = null)
     {
         position ??= TransformComponent?.Position;
+        var scale = TransformComponent?.Scale ?? Vec2.One;
         return new Rect(
-            position?.X + Offset.X - Size.X / 2 ?? 0,
-            position?.Y + Offset.Y - Size.Y / 2 ?? 0,
-            Size
+            position?.X + Offset.X - Size.X * scale.X / 2 ?? 0,
+            position?.Y + Offset.Y - Size.Y * scale.Y / 2 ?? 0,
+            Size * scale
         );
     }
 
@@ -122,13 +123,7 @@ public class CollisionComponent(
 
         if (DrawDebug)
             SERender.DrawRectangleLines(
-                new Rect(
-                    new Vec2(
-                        TransformComponent.Position.X - Size.X / 2 + Offset.X,
-                        TransformComponent.Position.Y - Size.Y / 2 + Offset.Y
-                    ),
-                    Size
-                ),
+                GetCollisionRect(),
                 2,
                 Color.Red,
                 InstructionSource.Entity,
