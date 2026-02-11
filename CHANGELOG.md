@@ -7,7 +7,10 @@
 [#] Bug Fixes<br>
 [.] Others
 
-### V 2.5.0 - ??/01/2025
+### V 2.5.1 - 11/02/2026
+[#] CollisionComponent: Transform scale not applied
+
+### V 2.5.0 - 06/01/2026
 [\~] LogLevel: Remove log prefix<br/>
 [\~] Tween: Tween logs are now debug logs<br/>
 [.] Full refactor with Rider
