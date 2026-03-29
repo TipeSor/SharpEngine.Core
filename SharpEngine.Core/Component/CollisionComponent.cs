@@ -95,9 +95,9 @@ public class CollisionComponent(
                 var entityRect = entityPhysics.GetCollisionRect();
                 var selfRect = GetCollisionRect(position);
                 if (!Raylib.CheckCollisionRecs(entityRect, selfRect)) continue;
-                
+
                 CollisionCallback?.Invoke(Entity, entity);
-                entityPhysics.CollisionCallback?.Invoke(Entity, entity);
+                entityPhysics.CollisionCallback?.Invoke(entity, Entity);
 
                 if (canGo)
                     canGo = !(Solid && entityPhysics.Solid);

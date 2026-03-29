@@ -38,6 +38,45 @@ public class Rect(float x, float y, float width, float height)
     public float Height { get; set; } = height;
 
     /// <summary>
+    /// Position
+    /// </summary>
+    public Vec2 Position
+    {
+        get => new(X, Y);
+        set
+        {
+            X = value.X;
+            Y = value.Y;
+        }
+    }
+
+    /// <summary>
+    /// Size
+    /// </summary>
+    public Vec2 Size
+    {
+        get => new(Width, Height);
+        set
+        {
+            Width = value.X;
+            Height = value.Y;
+        }
+    }
+
+    /// <summary>
+    /// Center
+    /// </summary>
+    public Vec2 Center
+    {
+        get => new(X + (Width / 2f), Y + (Height / 2f));
+        set
+        {
+            X = value.X - (Width / 2f);
+            Y = value.Y - (Height / 2f);
+        }
+    }
+
+    /// <summary>
     /// Rectangle
     /// </summary>
     /// <param name="position">Position</param>
@@ -121,5 +160,13 @@ public class Rect(float x, float y, float width, float height)
     /// <param name="rect">Rect</param>
     /// <returns>Rect</returns>
     public static implicit operator Rectangle(Rect rect) =>
+        new(rect.X, rect.Y, rect.Width, rect.Height);
+
+    /// <summary>
+    /// Convert Rectangle to Rect
+    /// </summary>
+    /// <param name="rect">Rectangle</param>
+    /// <returns>Rect</returns>
+    public static implicit operator Rect(Rectangle rect) =>
         new(rect.X, rect.Y, rect.Width, rect.Height);
 }

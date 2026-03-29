@@ -41,7 +41,7 @@ public class McLang : ILang
             {
                 DebugManager.Log(
                     LogLevel.Warning,
-                    $"SE_MCLANG: Cannot found '=' between key and value : {line} (Skip line)"
+                    $"SE_MCLANG: Cannot find '=' between key and value : {line} (Skip line)"
                 );
                 continue;
             }

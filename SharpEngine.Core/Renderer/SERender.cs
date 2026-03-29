@@ -149,6 +149,90 @@ public static class SERender
     }
 
     /// <summary>
+    /// Add Draw Line Instruction
+    /// </summary>
+    /// <param name="startX">Start X</param>
+    /// <param name="startY">Start Y</param>
+    /// <param name="endX">End X</param>
+    /// <param name="endY">End Y</param>
+    /// <param name="color">Color</param>
+    /// <param name="source">Instruction Source</param>
+    /// <param name="zLayer">Z Layer</param>
+    public static void DrawLine(
+        int startX,
+        int startY,
+        int endX,
+        int endY,
+        Utils.Color color,
+        InstructionSource source,
+        float zLayer
+    )
+    {
+        _instructions.Add(
+            new DrawLine
+            {
+                Source = source,
+                ZLayer = zLayer,
+                Parameters = [startX, startY, endX, endY, color]
+            }
+        );
+    }
+
+    /// <summary>
+    /// Add Draw Line V Instruction
+    /// </summary>
+    /// <param name="startPos">Start Position</param>
+    /// <param name="endPos">End Position</param>
+    /// <param name="color">Color</param>
+    /// <param name="source">Instruction Source</param>
+    /// <param name="zLayer">Z Layer</param>
+    public static void DrawLine(
+        Vec2 startPos,
+        Vec2 endPos,
+        Utils.Color color,
+        InstructionSource source,
+        float zLayer
+    )
+    {
+        _instructions.Add(
+            new DrawLineV
+            {
+                Source = source,
+                ZLayer = zLayer,
+                Parameters = [startPos, endPos, color]
+            }
+        );
+    }
+
+    /// <summary>
+    /// Add Draw Line Ex Instruction
+    /// </summary>
+    /// <param name="startPos">Start Position</param>
+    /// <param name="endPos">End Position</param>
+    /// <param name="thick">Thickness</param>
+    /// <param name="color">Color</param>
+    /// <param name="source">Instruction Source</param>
+    /// <param name="zLayer">Z Layer</param>
+    public static void DrawLine(
+        Vec2 startPos,
+        Vec2 endPos,
+        float thick,
+        Utils.Color color,
+        InstructionSource source,
+        float zLayer
+    )
+    {
+        _instructions.Add(
+            new DrawLineEx
+            {
+                Source = source,
+                ZLayer = zLayer,
+                Parameters = [startPos, endPos, thick, color]
+            }
+        );
+    }
+
+    /// <summary>
     /// Add Draw Rectangle Pro Instruction
     /// </summary>
     /// <param name="rectangle">Rectangle</param>

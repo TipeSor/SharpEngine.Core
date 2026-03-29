@@ -206,6 +206,10 @@ public class Window
     internal bool ImguiDisplayWindow = false;
     internal bool ImguiDisplayConsole = false;
 
+    internal Stopwatch sw = new();
+    internal TimeSpan updateTime = TimeSpan.Zero;
+    internal TimeSpan drawTime = TimeSpan.Zero;
+
     private static bool ConsoleLog { get; set; } = true;
     private static bool FileLog { get; set; }
 
@@ -443,6 +447,7 @@ public class Window
 
             #endregion
 
+            sw.Restart();
             #region Update
 
             var delta = Raylib.GetFrameTime();
@@ -463,7 +468,10 @@ public class Window
             TweenManager.Update(delta);
 
             #endregion
+            sw.Stop();
+            updateTime = sw.Elapsed;
 
+            sw.Restart();
             #region Draw
 
             if (Debug)
@@ -500,6 +508,8 @@ public class Window
             }
 
             #endregion
+            sw.Stop();
+            drawTime = sw.Elapsed;
         }
 
         #region Unload
@@ -552,23 +562,58 @@ public class Window
     private static unsafe void LogCustom(int logLevel, sbyte* text, sbyte* args)
     {
         var message = Logging.GetLogMessage(new IntPtr(text), new IntPtr(args));
-        message = (LogLevel)logLevel switch
-        {
-            LogLevel.Trace => $"TRACE: {message}",
-            LogLevel.All => $"ALL: {message}",
-            LogLevel.Debug => $"DEBUG: {message}",
-            LogLevel.Info => $"INFO: {message}",
-            LogLevel.Warning => $"WARNING: {message}",
-            LogLevel.Error => $"ERROR: {message}",
-            LogLevel.Fatal => $"FATAL: {message}",
-            _ => message
-        };
+        var level = (LogLevel)logLevel;
 
-        message = $"{DateTime.Now:dd/MM/yyyy HH:mm:ss} - {message}";
+        var timestamp = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
         if (ConsoleLog)
-            Console.WriteLine(message);
+        {
+            var formatted = FormatMessage(level, message, useColor: !Console.IsOutputRedirected);
+            Console.WriteLine($"{timestamp} - {formatted}");
+        }
+
         if (FileLog)
-            File.AppendAllText("log.txt", message + "\n");
+        {
+            var formatted = FormatMessage(level, message, useColor: false);
+            File.AppendAllText("log.txt", $"{timestamp} - {formatted}\n");
+        }
+    }
+
+    private static string FormatMessage(LogLevel level, string message, bool useColor)
+    {
+        string? label = level switch
+        {
+            LogLevel.Trace => "TRACE",
+            LogLevel.All => "ALL",
+            LogLevel.Debug => "DEBUG",
+            LogLevel.Info => "INFO",
+            LogLevel.Warning => "WARNING",
+            LogLevel.Error => "ERROR",
+            LogLevel.Fatal => "FATAL",
+            _ => null
+        };
+
+        if (label == null)
+            return message;
+
+        if (!useColor)
+            return $"{label}: {message}";
+
+        return level switch
+        {
+            LogLevel.Info => $"{ColorText(Color.DeepSkyBlue, label)}: {message}",
+            LogLevel.Warning => $"{ColorText(Color.Yellow, label)}: {message}",
+            LogLevel.Error => $"{ColorText(Color.Red, label)}: {message}",
+            LogLevel.Fatal => $"{ColorText(Color.DarkRed, label)}: {message}",
+            _ => $"{label}: {message}"
+        };
+    }
+
+    private static string ColorText(Color color, string text)
+    {
+        if (Console.IsOutputRedirected)
+            return text;
+
+        return $"\u001b[38;2;{color.R};{color.G};{color.B}m{text}\u001b[0m";
     }
 }

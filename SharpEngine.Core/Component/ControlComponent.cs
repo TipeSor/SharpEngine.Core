@@ -151,28 +151,23 @@ public class ControlComponent : Component
 
         IsMoving = true;
         Direction = move.Normalized();
-        var newPos = new Vec2(
-            Transform.LocalPosition.X + Direction.X * Speed * delta,
-            Transform.LocalPosition.Y + Direction.Y * Speed * delta
-        );
-        var newPosX = new Vec2(
-            Transform.LocalPosition.X + Speed * delta * (Direction.X < 0 ? -1 : 1),
-            Transform.LocalPosition.Y
-        );
-        var newPosY = new Vec2(
-            Transform.LocalPosition.X,
-            Transform.LocalPosition.Y + Speed * delta * (Direction.Y < 0 ? -1 : 1)
-        );
-        if (BasicPhysics == null || BasicPhysics.CanGo(newPos + (Entity?.Parent?.GetComponentAs<TransformComponent>()?.Position ?? Vec2.Zero)))
-            Transform.LocalPosition = newPos;
-        else if (Direction.X != 0 && BasicPhysics.CanGo(newPosX + (Entity?.Parent?.GetComponentAs<TransformComponent>()?.Position ?? Vec2.Zero)))
+        var moveDelta = new Vec2(
+            Direction.X,
+            Direction.Y
+        ) * Speed * delta;
+
+        if (BasicPhysics == null || BasicPhysics.CanGo(Transform.Position + moveDelta))
         {
-            Transform.LocalPosition = newPosX;
+            Transform.LocalPosition += moveDelta;
+        }
+        else if (Direction.X != 0 && BasicPhysics.CanGo(Transform.Position + new Vec2(moveDelta.X, 0)))
+        {
+            Transform.LocalPosition.X += moveDelta.X;
             Direction = new Vec2(Direction.X < 0 ? -1 : 1, 0);
         }
-        else if (Direction.Y != 0 && BasicPhysics.CanGo(newPosY + (Entity?.Parent?.GetComponentAs<TransformComponent>()?.Position ?? Vec2.Zero)))
+        else if (Direction.Y != 0 && BasicPhysics.CanGo(Transform.Position + new Vec2(0, moveDelta.Y)))
         {
-            Transform.LocalPosition = newPosY;
+            Transform.LocalPosition.Y += moveDelta.Y;
             Direction = new Vec2(0, Direction.Y < 0 ? -1 : 1);
         }
         else

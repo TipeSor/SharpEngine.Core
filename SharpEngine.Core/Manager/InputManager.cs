@@ -47,14 +47,14 @@ public static class InputManager
     /// Check if key is pressed
     /// </summary>
     /// <param name="key">Key</param>
-    /// <returns>If Key is pressed</returns>
+    /// <returns>If Key was pressed once</returns>
     public static bool IsKeyPressed(Key key) => Raylib.IsKeyPressed(key.ToRayLib());
 
     /// <summary>
     /// Check if key is released
     /// </summary>
     /// <param name="key">Key</param>
-    /// <returns>If Key is released</returns>
+    /// <returns>If Key was released once</returns>
     [UsedImplicitly]
     public static bool IsKeyReleased(Key key) => Raylib.IsKeyReleased(key.ToRayLib());
 
@@ -105,11 +105,9 @@ public static class InputManager
     /// <returns>Position</returns>
     public static Vec2 GetMousePosition()
     {
-        var realPosition = Raylib.GetMousePosition();
-        return new Vec2(
-            (realPosition.X - (InternalWindow.ScreenSize.X - (InternalWindow.RenderSize.X * InternalWindow.RenderScale)) * 0.5f) / InternalWindow.RenderScale,
-            (realPosition.Y - (InternalWindow.ScreenSize.Y - (InternalWindow.RenderSize.Y * InternalWindow.RenderScale)) * 0.5f) / InternalWindow.RenderScale
-        );
+        Vec2 realPosition = Raylib.GetMousePosition();
+
+        return (realPosition - ((InternalWindow.ScreenSize - (InternalWindow.RenderSize * InternalWindow.RenderScale)) * 0.5f)) / InternalWindow.RenderScale;
     }
 
     /// <summary>

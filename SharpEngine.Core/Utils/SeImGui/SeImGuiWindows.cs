@@ -29,11 +29,16 @@ public static class SeImGuiWindows
         foreach (var version in DebugManager.Versions)
             ImGui.Text($"{version.Key} Version : {version.Value}");
         ImGui.Separator();
+        ImGui.Text($"FPS (from Raylib) : {1000.0 / Raylib_cs.Raylib.GetFPS():.000}ms/frame ({Raylib_cs.Raylib.GetFPS()} FPS)");
         ImGui.Text(
             $"FPS (from ImGui) : {1000.0 / ImGui.GetIO().Framerate:.000}ms/frame ({ImGui.GetIO().Framerate} FPS)"
         );
         ImGui.Text($"FPS (from SE) : {1000.0 / DebugManager.FrameRate:.000}ms/frame ({DebugManager.FrameRate} FPS)");
-        ImGui.Text($"GC Memory : {DebugManager.GcMemory / 1000000.0:.000} mo");
+        ImGui.Text($"GC Memory : {DebugManager.GcMemory / 1048576.0:.000} mib");
+        ImGui.Separator();
+        ImGui.Text($"Update Time : {window.updateTime.TotalMilliseconds:.000}ms/frame");
+        ImGui.Text($"Draw   Time : {window.drawTime.TotalMilliseconds:.000}ms/frame");
+        ImGui.Text($"Frame  Time : {(window.updateTime + window.drawTime).TotalMilliseconds:.000}ms/frame");
         ImGui.Separator();
         ImGui.Text($"Screen Size : {window.ScreenSize}");
         ImGui.Text($"Render Size : {window.RenderSize}");
@@ -61,6 +66,7 @@ public static class SeImGuiWindows
         ImGui.Text($"Camera Mode : {window.CameraManager.Mode}");
         ImGui.Text($"Camera Position : {window.CameraManager.Camera2D.Target}");
         ImGui.Text($"Camera Rotation : {window.CameraManager.Rotation}");
+        ImGui.Text($"Camera Zoom : {window.CameraManager.Zoom}");
         ImGui.Separator();
         ImGui.Text($"Number of Render Instructions : {SERender.LastInstructionsNumber}");
         ImGui.Text(
