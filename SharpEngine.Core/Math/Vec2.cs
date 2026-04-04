@@ -94,6 +94,20 @@ public class Vec2
         return MathF.Sqrt(x * x + y * y);
     }
 
+    /// <summary>
+    /// Get Squared Distance to go to Vector 2D
+    /// </summary>
+    /// <param name="vec2">Target</param>
+    /// <returns>Distance</returns>
+    [UsedImplicitly]
+    public float DistanceToSquared(Vec2 vec2)
+    {
+        var x = vec2.X - X;
+        var y = vec2.Y - Y;
+        return x * x + y * y;
+    }
+
+
     /// <inheritdoc />
     public override bool Equals(object? obj)
     {

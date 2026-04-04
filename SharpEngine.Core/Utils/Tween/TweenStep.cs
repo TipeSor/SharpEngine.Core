@@ -41,7 +41,7 @@ public class TweenStep
     /// <param name="duration">Duration of the tween</param>
     /// <param name="from">Source Value</param>
     /// <returns>Tween Step</returns>
-    public TweenStep Float(object entity, Expression<Func<object, float>> property, float to, float duration, float? from = null)
+    public TweenStep Float<T>(object entity, Expression<Func<object, float>> property, float to, float duration, float? from = null)
     {
         _floatTweens.Add(new TweenData<float, float>(entity, property, from ?? 0, to, duration, from is not null));
         return this;

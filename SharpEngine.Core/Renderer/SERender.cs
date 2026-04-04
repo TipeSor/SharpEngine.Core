@@ -317,6 +317,62 @@ public static class SERender
     }
 
     /// <summary>
+    /// Add Draw Circle Instruction
+    /// </summary>
+    /// <param name="posX">Position X</param>
+    /// <param name="posY">Position Y</param>
+    /// <param name="radius">Radius</param>
+    /// <param name="color">Color</param>
+    /// <param name="source">Instruction Source</param>
+    /// <param name="zLayer">Z Layer</param>
+    [UsedImplicitly]
+    public static void DrawCircle(
+        float posX,
+        float posY,
+        float radius,
+        Utils.Color color,
+        InstructionSource source,
+        float zLayer
+    )
+    {
+        _instructions.Add(
+            new DrawCircle
+            {
+                Source = source,
+                ZLayer = zLayer,
+                Parameters = [posX, posY, radius, color]
+            }
+        );
+    }
+
+    /// <summary>
+    /// Add Draw Circle V Instruction
+    /// </summary>
+    /// <param name="pos">Position</param>
+    /// <param name="radius">Radius</param>
+    /// <param name="color">Color</param>
+    /// <param name="source">Instruction Source</param>
+    /// <param name="zLayer">Z Layer</param>
+    [UsedImplicitly]
+    public static void DrawCircle(
+        Vec2 pos,
+        float radius,
+        Utils.Color color,
+        InstructionSource source,
+        float zLayer
+    )
+    {
+        _instructions.Add(
+            new DrawCircleV
+            {
+                Source = source,
+                ZLayer = zLayer,
+                Parameters = [pos, radius, color]
+            }
+        );
+    }
+
+    /// <summary>
     /// Add Draw Circle Lines Instruction
     /// </summary>
     /// <param name="posX">Position X</param>
