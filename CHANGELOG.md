@@ -7,6 +7,9 @@
 [#] Bug Fixes<br>
 [.] Others
 
+### V 2.5.2 - 26/04/2026
+[#] Window: Crash on ImGui when debug is false
+
 ### V 2.5.1 - 11/02/2026
 [#] CollisionComponent: Transform scale not applied
 

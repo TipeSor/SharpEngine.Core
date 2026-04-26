@@ -459,8 +459,9 @@ public class Window
                 ImGui.Render();
                 firstFrame = false;
             }
-
-            SeImGui.Update(delta);
+            
+            if(Debug)
+                SeImGui.Update(delta);
 
             CurrentScene.Update(delta);
             CameraManager.Update(delta);

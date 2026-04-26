@@ -289,6 +289,31 @@ public static class SERender
             }
         );
     }
+    /// <summary>
+    /// Add Draw Rectangle V Instruction
+    /// </summary>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size</param>
+    /// <param name="color">Color</param>
+    /// <param name="source">Instruction Source</param>
+    /// <param name="zLayer">Z Layer</param>
+    public static void DrawRectangle(
+        Vec2 position,
+        Vec2 size,
+        Utils.Color color,
+        InstructionSource source,
+        float zLayer
+    )
+    {
+        _instructions.Add(
+            new DrawRectangleV
+            {
+                Source = source,
+                ZLayer = zLayer,
+                Parameters = [position, size, color]
+            }
+        );
+    }
 
     /// <summary>
     /// Add Draw Rectangle Lines Ex Instruction
