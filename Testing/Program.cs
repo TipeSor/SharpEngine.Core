@@ -17,7 +17,7 @@ internal static class Program
             "SE Raylib",
             Color.CornflowerBlue,
             null,
-            true,
+            false,
             true,
             true
         );
