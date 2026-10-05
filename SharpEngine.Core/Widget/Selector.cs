@@ -24,7 +24,14 @@ public class Selector : Widget
 	/// Selected Index of Selector
 	/// </summary>
 	[UsedImplicitly]
-	public int SelectedIndex { get; set; }
+	public int SelectedIndex
+	{
+		get; set
+		{
+			field = value;
+			LabelValue.Text = Selected;
+		}
+	}
 
 	/// <summary>
 	/// Left Button of Selector
