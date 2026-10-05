@@ -14,13 +14,13 @@ public abstract class Widget
     /// <summary>
     /// Position of Widget
     /// </summary>
-    public Vec2 Position { get; set; }
+    public required Vec2 Position { get; set; }
 
     /// <summary>
     /// Z Layer of Widget
     /// </summary>
     [UsedImplicitly]
-    public int ZLayer { get; set; }
+    public virtual int ZLayer { get; set; } = 0;
 
     /// <summary>
     /// If Widget is Displayed
@@ -87,24 +87,13 @@ public abstract class Widget
     private Scene? _scene;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Widget"/> class.
-    /// </summary>
-    /// <param name="position">The position of the widget.</param>
-    /// <param name="zLayer">The Z layer of the widget.</param>
-    protected Widget(Vec2 position, int zLayer = 0)
-    {
-        Position = position;
-        ZLayer = zLayer;
-    }
-
-    /// <summary>
     /// Get All Direct Children of one Type
     /// </summary>
     /// <typeparam name="T">Type of Children</typeparam>
     /// <returns>Children of type T</returns>
     [UsedImplicitly]
     public List<T> GetChildrenAs<T>()
-        where T : Widget => Children.FindAll(w => w.GetType() == typeof(T)).Cast<T>().ToList();
+        where T : Widget => [.. Children.FindAll(w => w.GetType() == typeof(T)).Cast<T>()];
 
     /// <summary>
     /// Get All Recursive Children

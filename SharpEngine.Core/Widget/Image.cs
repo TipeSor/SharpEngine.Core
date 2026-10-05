@@ -8,36 +8,25 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which display Image
 /// </summary>
-/// <param name="position">Image Position</param>
-/// <param name="texture">Image Texture ("")</param>
-/// <param name="scale">Image Scale (Vec2(1))</param>
-/// <param name="rotation">Image Rotation (0)</param>
-/// <param name="zLayer">Z Layer</param>
-public class Image(
-    Vec2 position,
-    string texture = "",
-    Vec2? scale = null,
-    int rotation = 0,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class Image : Widget
 {
     /// <summary>
     /// Name of Texture which be displayed
     /// </summary>
     [UsedImplicitly]
-    public string Texture { get; set; } = texture;
+    public string Texture { get; set; } = string.Empty;
 
     /// <summary>
     /// Scale of Image
     /// </summary>
     [UsedImplicitly]
-    public Vec2 Scale { get; set; } = scale ?? Vec2.One;
+    public Vec2 Scale { get; set; } = Vec2.One;
 
     /// <summary>
     /// Rotation of Image
     /// </summary>
     [UsedImplicitly]
-    public int Rotation { get; set; } = rotation;
+    public int Rotation { get; set; } = 0;
 
     /// <inheritdoc />
     public override void Draw()

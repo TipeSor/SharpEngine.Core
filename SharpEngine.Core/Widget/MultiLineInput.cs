@@ -12,23 +12,8 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which represents Multi Line Input
 /// </summary>
-/// <param name="position">Multi Line Edit Position</param>
-/// <param name="text">Multi Line Edit Text ("")</param>
-/// <param name="font">Multi Line Edit Font ("")</param>
-/// <param name="size">Multi Line Edit Size (Vec2(500, 200))</param>
-/// <param name="fontSize">Multi Line Edit Font Size (null)</param>
-/// <param name="secret">If Multi Line Edit is Secret (false)</param>
-/// <param name="zLayer">Z Layer</param>
 [UsedImplicitly]
-public class MultiLineInput(
-    Vec2 position,
-    string text = "",
-    string font = "",
-    Vec2? size = null,
-    int? fontSize = null,
-    bool secret = false,
-    int zLayer = 0
-) : LineInput(position, text, font, size, fontSize, secret, zLayer)
+public class MultiLineInput : LineInput
 {
     /// <inheritdoc />
     public override void Update(float delta)

@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Raylib_cs;
+using SharpEngine.Core.Manager;
 using SharpEngine.Core.Math;
 using SharpEngine.Core.Renderer;
 using SharpEngine.Core.Widget.Utils;
@@ -10,67 +11,48 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which display Label
 /// </summary>
-/// <param name="position">Label Position</param>
-/// <param name="text">Label Text</param>
-/// <param name="font">Label Font</param>
-/// <param name="color">Label Color</param>
-/// <param name="style">Label Style</param>
-/// <param name="rotation">Label Rotation</param>
-/// <param name="centerAllLines">If Label Lines is Centered</param>
-/// <param name="fontSize">Label Font Size (or null)</param>
-/// <param name="zLayer">Z Layer</param>
-public class Label(
-    Vec2 position,
-    string text = "",
-    string font = "",
-    Color? color = null,
-    LabelStyles style = LabelStyles.None,
-    int rotation = 0,
-    bool centerAllLines = false,
-    int? fontSize = null,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class Label : Widget
 {
     /// <summary>
     /// Text of Label
     /// </summary>
-    public string Text { get; set; } = text;
+    public string Text { get; set; } = string.Empty;
 
     /// <summary>
     /// Font of Label
     /// </summary>
     [UsedImplicitly]
-    public string Font { get; set; } = font;
+    public string Font { get; set; } = FontManager.Default;
 
     /// <summary>
     /// Color of Label
     /// </summary>
     [UsedImplicitly]
-    public Color Color { get; set; } = color ?? Color.Black;
+    public Color Color { get; set; } = Color.Black;
 
     /// <summary>
     /// If Lines is Centered
     /// </summary>
     [UsedImplicitly]
-    public bool CenterAllLines { get; set; } = centerAllLines;
+    public bool CenterAllLines { get; set; } = false;
 
     /// <summary>
     /// Rotation of Label
     /// </summary>
     [UsedImplicitly]
-    public int Rotation { get; set; } = rotation;
+    public int Rotation { get; set; } = 0;
 
     /// <summary>
     /// Font Size of Label (or Null)
     /// </summary>
     [UsedImplicitly]
-    public int? FontSize { get; set; } = fontSize;
+    public int? FontSize { get; set; }
 
     /// <summary>
     /// Style of Label
     /// </summary>
     [UsedImplicitly]
-    public LabelStyles Style { get; set; } = style;
+    public LabelStyles Style { get; set; } = LabelStyles.None;
 
     /// <inheritdoc />
     public override void Draw()
@@ -110,7 +92,7 @@ public class Label(
             if (Style.HasFlag(LabelStyles.Strike))
                 SERender.DrawRectangle(
                     finalPosition.X,
-                    (finalPosition.Y + lineSize.Y / 2),
+                    finalPosition.Y + lineSize.Y / 2,
                     lineSize.X,
                     2,
                     Color.Black,
@@ -120,7 +102,7 @@ public class Label(
             if (Style.HasFlag(LabelStyles.Underline))
                 SERender.DrawRectangle(
                     finalPosition.X,
-                    (finalPosition.Y + lineSize.Y),
+                    finalPosition.Y + lineSize.Y,
                     lineSize.X,
                     2,
                     Color.Black,

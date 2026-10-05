@@ -12,6 +12,11 @@ namespace SharpEngine.Core.Manager;
 /// </summary>
 public class FontManager
 {
+	/// <summary>
+	/// Default font key
+	/// </summary>
+	public const string Default = "RAYLIB_DEFAULT";
+
     private readonly Dictionary<string, Font> _fonts = [];
 
     /// <summary>
@@ -55,7 +60,9 @@ public class FontManager
     [UsedImplicitly]
     public void AddFont(string name, string file, int fontSize = 25)
     {
-        if (!File.Exists(file))
+		// TODO: add check for default key
+
+		if (!File.Exists(file))
         {
             DebugManager.Log(LogLevel.Fatal, $"SE_FONTMANAGER: Font not found : {name}");
             throw new FileNotFoundException($"Font not found : {file}");
@@ -73,7 +80,7 @@ public class FontManager
     /// <exception cref="ArgumentException">Thrown if the font is not found.</exception>
     public Font GetFont(string name)
     {
-        if (name == "RAYLIB_DEFAULT")
+        if (name == Default)
             return Raylib.GetFontDefault();
 
         if (_fonts.TryGetValue(name, out var font))

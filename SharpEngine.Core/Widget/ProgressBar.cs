@@ -18,52 +18,27 @@ public class ProgressBar : Widget
     {
         get;
         set => field = MathHelper.Clamp(value, 0, 100);
-    }
+    } = 0;
 
     /// <summary>
     /// Size of Bar
     /// </summary>
     [UsedImplicitly]
-    public Vec2 Size { get; set; }
+    public Vec2 Size { get; set; } = new Vec2(150, 60);
 
     /// <summary>
     /// Color of Bar
     /// </summary>
-    [UsedImplicitly]
-    public Color Color { get; set; }
+    [UsedImplicitly] 
+    public Color Color { get; set; } = Color.Green;
 
     /// <summary>
     /// If Bar is Horizontal
     /// </summary>
     [UsedImplicitly]
-    public bool Horizontal { get; set; }
+    public bool Horizontal { get; set; } = true;
 
-    /// <summary>
-    /// Create a ProgressBar
-    /// </summary>
-    /// <param name="position">Position</param>
-    /// <param name="size">Size (Vec2(150, 60))</param>
-    /// <param name="color">Color (Color.Green)</param>
-    /// <param name="value">Value (0)</param>
-    /// <param name="horizontal">Horizontal (true)</param>
-    /// <param name="zLayer">ZLayer (0)</param>
-    public ProgressBar(
-        Vec2 position,
-        Vec2? size = null,
-        Color? color = null,
-        float value = 0,
-        bool horizontal = true,
-        int zLayer = 0
-    )
-        : base(position, zLayer)
-    {
-        Size = size ?? new Vec2(150, 60);
-        Color = color ?? Color.Green;
-        Value = value;
-        Horizontal = horizontal;
-    }
-
-    /// <inheritdoc />
+	/// <inheritdoc />
     public override void Draw()
     {
         base.Draw();

@@ -14,40 +14,25 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which represents Line Input
 /// </summary>
-/// <param name="position">Line Edit Position</param>
-/// <param name="text">Line Edit Text ("")</param>
-/// <param name="font">Line Edit Font ("")</param>
-/// <param name="size">Line Edit Size (Vec2(300, 50))</param>
-/// <param name="fontSize">Line Edit Font Size (null)</param>
-/// <param name="secret">If Line Edit is Secret (false)</param>
-/// <param name="zLayer">Z Layer</param>
-public class LineInput(
-    Vec2 position,
-    string text = "",
-    string font = "",
-    Vec2? size = null,
-    int? fontSize = null,
-    bool secret = false,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class LineInput : Widget
 {
     /// <summary>
     /// Current Text of Line Input
     /// </summary>
     [UsedImplicitly]
-    public string Text { get; set; } = text;
+    public string Text { get; set; } = string.Empty;
 
     /// <summary>
     /// Font of Line Input
     /// </summary>
     [UsedImplicitly]
-    public string Font { get; set; } = font;
+    public string Font { get; set; } = FontManager.Default;
 
     /// <summary>
     /// Size of Line Input
     /// </summary>
     [UsedImplicitly]
-    public Vec2 Size { get; set; } = size ?? new Vec2(300, 50);
+    public Vec2 Size { get; set; } = new Vec2(300, 50);
 
     /// <summary>
     /// If Line Input is Focused
@@ -59,13 +44,13 @@ public class LineInput(
     /// Font Size of Line Input (or null)
     /// </summary>
     [UsedImplicitly]
-    public int? FontSize { get; set; } = fontSize;
+    public int? FontSize { get; set; }
 
     /// <summary>
     /// If Line Input is Secret
     /// </summary>
     [UsedImplicitly]
-    public bool Secret { get; set; } = secret;
+    public bool Secret { get; set; }
 
     /// <summary>
     /// Event trigger when the value is changed
@@ -196,8 +181,8 @@ public class LineInput(
         
         var potentielSize = Raylib.MeasureTextEx(finalFont.Value, "A", finalFontSize, 2);
         SERender.DrawRectangle(
-            (RealPosition.X - Size.X / 2 + 10 + textSize.X - (offset > 0 ? offset : 0)),
-            (RealPosition.Y - potentielSize.Y / 2 + 2),
+            RealPosition.X - Size.X / 2 + 10 + textSize.X - (offset > 0 ? offset : 0),
+            RealPosition.Y - potentielSize.Y / 2 + 2,
             5,
             potentielSize.Y - 4,
             Color.Black,
