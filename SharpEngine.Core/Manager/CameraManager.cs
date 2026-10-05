@@ -73,6 +73,16 @@ public class CameraManager
         set => Camera2D.Target = value;
     }
 
+	/// <summary>
+	/// Camera transform matrix
+	/// </summary>
+    [UsedImplicitly]
+	public Matrix3x2 Transform => 
+		Matrix3x2.CreateTranslation(-Camera2D.Target) * 
+		Matrix3x2.CreateScale(Camera2D.Zoom) * 
+		Matrix3x2.CreateRotation(float.DegreesToRadians(Camera2D.Rotation)) *
+		Matrix3x2.CreateTranslation(Camera2D.Offset);
+
     internal Camera2D Camera2D;
 
     /// <summary>
