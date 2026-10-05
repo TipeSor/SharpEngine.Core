@@ -11,24 +11,7 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which display Button
 /// </summary>
-/// <param name="position">Button Position</param>
-/// <param name="text">Button Text</param>
-/// <param name="font">Button Font</param>
-/// <param name="size">Button Size</param>
-/// <param name="fontColor">Button Font Color</param>
-/// <param name="backgroundColor">Button Background Color</param>
-/// <param name="fontSize">Button Font Size</param>
-/// <param name="zLayer">Z Layer</param>
-public class Button(
-    Vec2 position,
-    string text = "",
-    string font = "",
-    Vec2? size = null,
-    Color? fontColor = null,
-    Color? backgroundColor = null,
-    int? fontSize = null,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class Button : Widget
 {
     /// <summary>
     /// State of Button
@@ -54,32 +37,32 @@ public class Button(
     /// <summary>
     /// Text of Button
     /// </summary>
-    public string Text { get; set; } = text;
+    public string Text { get; set; } = string.Empty;
 
     /// <summary>
     /// Font of Button
     /// </summary>
-    public string Font { get; set; } = font;
+    public string Font { get; set; } = string.Empty;
 
     /// <summary>
     /// Size of Button
     /// </summary>
-    public Vec2 Size { get; set; } = size ?? new Vec2(200, 40);
+    public Vec2 Size { get; set; } = new Vec2(200, 40);
 
     /// <summary>
     /// Color of Button Font
     /// </summary>
-    public Color FontColor { get; set; } = fontColor ?? Color.Black;
+    public Color FontColor { get; set; } = Color.Black;
 
     /// <summary>
     /// Color of Button Background
     /// </summary>
-    public Color BackgroundColor { get; set; } = backgroundColor ?? Color.Gray;
+    public Color BackgroundColor { get; set; } = Color.Gray;
 
     /// <summary>
     /// Font Size of Button (or Null)
     /// </summary>
-    public int? FontSize { get; set; } = fontSize;
+    public int? FontSize { get; set; }
 
     /// <summary>
     /// Event that triggers when a button is clicked

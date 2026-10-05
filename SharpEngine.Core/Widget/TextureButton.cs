@@ -9,31 +9,14 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which display Texture Button
 /// </summary>
-/// <param name="position">Texture Button Position</param>
-/// <param name="text">Texture Button Text</param>
-/// <param name="font">Texture Button Font</param>
-/// <param name="texture">Texture Button Texture</param>
-/// <param name="size">Texture Button Size</param>
-/// <param name="fontColor">Texture Button Font Color</param>
-/// <param name="fontSize">Texture Button Font Size</param>
-/// <param name="zLayer">Z Layer</param>
 [UsedImplicitly]
-public class TextureButton(
-    Vec2 position,
-    string texture = "",
-    string text = "",
-    string font = "RAYLIB_DEFAULT",
-    Vec2? size = null,
-    Color? fontColor = null,
-    int? fontSize = null,
-    int zLayer = 0
-) : Button(position, text, font, size, fontColor, null, fontSize, zLayer)
+public class TextureButton : Button
 {
     /// <summary>
     /// Texture of Texture Button
     /// </summary>
     [UsedImplicitly]
-    public string Texture { get; set; } = texture;
+    public string Texture { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public override void Update(float delta)
@@ -73,10 +56,10 @@ public class TextureButton(
 
         if (State == ButtonState.Hover && Active)
             SERender.DrawRectangle(
-                (RealPosition.X - (Size.X + 4) / 2),
-                (RealPosition.Y - (Size.Y + 4) / 2),
-                (Size.X + 4),
-                (Size.Y + 4),
+                RealPosition.X - (Size.X + 4) / 2,
+                RealPosition.Y - (Size.Y + 4) / 2,
+                Size.X + 4,
+                Size.Y + 4,
                 Color.White,
                 InstructionSource.Ui,
                 ZLayer
@@ -111,8 +94,8 @@ public class TextureButton(
 
         if (State == ButtonState.Down || !Active)
             SERender.DrawRectangle(
-                (RealPosition.X - Size.X / 2),
-                (RealPosition.Y - Size.Y / 2),
+                RealPosition.X - Size.X / 2,
+                RealPosition.Y - (Size.Y / 2),
                 Size.X,
                 Size.Y,
                 new Color(0, 0, 0, 128),

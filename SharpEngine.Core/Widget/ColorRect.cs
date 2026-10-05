@@ -8,37 +8,26 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which display colored Rect
 /// </summary>
-/// <param name="position">Color Rect Position</param>
-/// <param name="size">Color Rect Size</param>
-/// <param name="color">Color Rect Color</param>
-/// <param name="rotation">Color Rect Rotation</param>
-/// <param name="zLayer">Z Layer</param>
 [UsedImplicitly]
-public class ColorRect(
-    Vec2 position,
-    Vec2? size = null,
-    Color? color = null,
-    int rotation = 0,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class ColorRect : Widget
 {
     /// <summary>
     /// Color of Rect
     /// </summary>
     [UsedImplicitly]
-    public Color Color { get; set; } = color ?? Color.Black;
+    public Color Color { get; set; } = Color.Black;
 
     /// <summary>
     /// Size of Rect
     /// </summary>
     [UsedImplicitly]
-    public Vec2 Size { get; set; } = size ?? Vec2.One;
+    public Vec2 Size { get; set; } = Vec2.One;
 
     /// <summary>
     /// Rotation of Rect
     /// </summary>
     [UsedImplicitly]
-    public int Rotation { get; set; } = rotation;
+    public int Rotation { get; set; } = 0;
 
     /// <inheritdoc />
     public override void Draw()

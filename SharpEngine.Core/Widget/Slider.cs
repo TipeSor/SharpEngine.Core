@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using SharpEngine.Core.Input;
 using SharpEngine.Core.Manager;
 using SharpEngine.Core.Math;
-using SharpEngine.Core.Utils;
 using SharpEngine.Core.Utils.EventArgs;
 
 namespace SharpEngine.Core.Widget;
@@ -11,21 +10,8 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which represents Slider
 /// </summary>
-/// <param name="position">Position</param>
-/// <param name="size">Size (Vec2(150, 60))</param>
-/// <param name="color">Color (Color.Green)</param>
-/// <param name="value">Value (0)</param>
-/// <param name="horizontal">Horizontal (true)</param>
-/// <param name="zLayer">ZLayer (0)</param>
 [UsedImplicitly]
-public class Slider(
-    Vec2 position,
-    Vec2? size = null,
-    Color? color = null,
-    float value = 0,
-    bool horizontal = true,
-    int zLayer = 0
-    ) : ProgressBar(position, size, color, value, horizontal, zLayer)
+public class Slider : ProgressBar
 {
     /// <summary>
     /// Event trigger when the value is changed

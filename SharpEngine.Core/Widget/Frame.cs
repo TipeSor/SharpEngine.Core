@@ -8,44 +8,31 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which display frame
 /// </summary>
-/// <param name="position">Frame Position</param>
-/// <param name="size">Frame Size</param>
-/// <param name="borderSize">Frame Border Size (3)</param>
-/// <param name="borderColor">Frame Border Color (Color.Black)</param>
-/// <param name="backgroundColor">Frame Background Color (null)</param>
-/// <param name="zLayer">Z Layer</param>
-public class Frame(
-    Vec2 position,
-    Vec2 size,
-    int borderSize = 3,
-    Color? borderColor = null,
-    Color? backgroundColor = null,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class Frame : Widget
 {
     /// <summary>
     /// Color of Frame Border
     /// </summary>
     [UsedImplicitly]
-    public Color BorderColor { get; set; } = borderColor ?? Color.Black;
+    public Color BorderColor { get; set; } = Color.Black;
 
     /// <summary>
     /// Size of Frame
     /// </summary>
     [UsedImplicitly]
-    public Vec2 Size { get; set; } = size;
+    public required Vec2 Size { get; set; }
 
     /// <summary>
     /// Size of Frame Border
     /// </summary>
     [UsedImplicitly]
-    public int BorderSize { get; set; } = borderSize;
+    public int BorderSize { get; set; } = 3;
 
     /// <summary>
     /// Color of Frame Background
     /// </summary>
     [UsedImplicitly]
-    public Color? BackgroundColor { get; set; } = backgroundColor;
+    public Color? BackgroundColor { get; set; }
 
     /// <inheritdoc />
     public override void Draw()

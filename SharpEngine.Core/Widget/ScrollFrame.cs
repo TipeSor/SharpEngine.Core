@@ -9,53 +9,38 @@ namespace SharpEngine.Core.Widget;
 /// <summary>
 /// Class which represents Scroll Frame
 /// </summary>
-/// <param name="position">Scroll Frame Position</param>
-/// <param name="size">Scroll Frame Size</param>
-/// <param name="scrollFactor">Scroll Frame Scroll Frame (5)</param>
-/// <param name="borderSize">Scroll Frame Border Size (3)</param>
-/// <param name="borderColor">Scroll Frame Border Color (Color.Black)</param>
-/// <param name="backgroundColor">Scroll Frame Background Color (null)</param>
-/// <param name="zLayer">Z Layer</param>
 [UsedImplicitly]
-public class ScrollFrame(
-    Vec2 position,
-    Vec2 size,
-    int scrollFactor = 5,
-    int borderSize = 3,
-    Color? borderColor = null,
-    Color? backgroundColor = null,
-    int zLayer = 0
-) : Widget(position, zLayer)
+public class ScrollFrame : Widget
 {
     /// <summary>
     /// Color of Scroll Frame Border
     /// </summary>
     [UsedImplicitly]
-    public Color BorderColor { get; set; } = borderColor ?? Color.Black;
+    public Color BorderColor { get; set; } = Color.Black;
 
     /// <summary>
     /// Size of Scroll Frame
     /// </summary>
     [UsedImplicitly]
-    public Vec2 Size { get; set; } = size;
+    public required Vec2 Size { get; set; }
 
     /// <summary>
     /// Size of Scroll Frame Border
     /// </summary>
     [UsedImplicitly]
-    public int BorderSize { get; set; } = borderSize;
+    public int BorderSize { get; set; } = 3;
 
     /// <summary>
     /// Color of Scroll Frame Background
     /// </summary>
     [UsedImplicitly]
-    public Color? BackgroundColor { get; set; } = backgroundColor;
+    public Color? BackgroundColor { get; set; } = null;
 
     /// <summary>
     /// Scroll Factor of Scroll Frame
     /// </summary>
     [UsedImplicitly]
-    public int ScrollFactor { get; set; } = scrollFactor;
+    public int ScrollFactor { get; set; } = 5;
 
     /// <inheritdoc />
     public override void Update(float delta)
@@ -96,16 +81,13 @@ public class ScrollFrame(
         );
 
         SERender.ScissorMode(
-            (RealPosition.X - Size.X / 2),
-            (RealPosition.Y - Size.Y / 2),
+            RealPosition.X - (Size.X / 2),
+            RealPosition.Y - Size.Y / 2,
             Size.X,
             Size.Y,
             InstructionSource.Ui,
             ZLayer + 0.00002f,
-            () =>
-            {
-                base.Draw();
-            }
+            base.Draw
         );
     }
 }
