@@ -26,7 +26,7 @@ public class LineInput : Widget
     /// Font of Line Input
     /// </summary>
     [UsedImplicitly]
-    public string Font { get; set; } = string.Empty;
+    public string Font { get; set; } = FontManager.Default;
 
     /// <summary>
     /// Size of Line Input

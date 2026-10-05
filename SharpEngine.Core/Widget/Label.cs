@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Raylib_cs;
+using SharpEngine.Core.Manager;
 using SharpEngine.Core.Math;
 using SharpEngine.Core.Renderer;
 using SharpEngine.Core.Widget.Utils;
@@ -21,7 +22,7 @@ public class Label : Widget
     /// Font of Label
     /// </summary>
     [UsedImplicitly]
-    public string Font { get; set; } = string.Empty;
+    public string Font { get; set; } = FontManager.Default;
 
     /// <summary>
     /// Color of Label
